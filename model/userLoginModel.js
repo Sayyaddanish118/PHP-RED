@@ -26,11 +26,11 @@ function todayDate() {
 let getUserByEmail = (req, callback, next) => {
  let username = req.body.username;
     // console.log(username)
-    let selectUser = "SELECT user_id,user_name,user_role,user_last_name,user_profile_pic,user_password,user_customer_id,user_status,user_joining_date	 FROM master_user WHERE (user_role='customer') AND (user_status !='removed') AND (user_email is not NULL AND lower(user_email)=$1) OR (user_mobile is not NULL AND lower(user_mobile)=$2)";
+    let selectUser = "SELECT user_id,user_name,user_role,user_last_name,user_profile_pic,user_password,user_customer_id,user_status,user_joining_date FROM master_user WHERE (user_role='customer') AND (user_status !='removed') AND (user_email is not NULL AND lower(user_email)=$1) OR (user_mobile is not NULL AND lower(user_mobile)=$2)";
 
     client['master'].query(selectUser, [username, username], (err, result) => {
         if (err) throw err;
-        console.log(result)
+        // console.log(result)
         return callback(result)
 
     })
@@ -39,7 +39,7 @@ let getUserByEmail = (req, callback, next) => {
 
 let passwordVerification = async (result, password, next) => {
     let storedPassWord = result.rows[0].user_password;
-    let storedPassWord2 = result.rows[0].user_password;
+    // let storedPassWord2 = result.rows[0].user_password;
     // console.log(storedPassWord)
     // console.log(storedPassWord2)
 

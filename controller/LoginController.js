@@ -1,10 +1,12 @@
 const { async} = require('q');
 const user=require('../model/userLoginModel')
 var datetime = require('node-datetime');
+const upload =require('../Middleware/upload').single('user_profile_pic')
 
 const employeeLogin = (req, res, next) => {
     try {
         /** INPUT FROM CLIENT SIDE */
+        upload(req, res, async (err) => {
         let username = req.body.username;
         let password = req.body.password
         let app_type = req.body.app_type;
@@ -20,7 +22,7 @@ const employeeLogin = (req, res, next) => {
                 status: false,
                 msg: 'Insufficient Parameters'
             }
-            console.log(failureInputResponse);
+            // console.log(failureInputResponse);
             res.send(failureInputResponse);
             return false
         }
@@ -73,7 +75,7 @@ const employeeLogin = (req, res, next) => {
              let deleteUserAPPS=await user.deleteUserApps(unknownUserResponse, device_id, device_os);
 
                 if (selectBeforeDlt.rowCount > 0) {
-                    console.log(selectBeforeDlt.rowCount);
+                    // console.log(selectBeforeDlt.rowCount);
                     if (selectBeforeDlt.rows[0].user_apps_device_token != device_token) {
                         user.updateDeviceToken(unknownUserResponse, device_token); //ask the doubt about the version
                     }
@@ -158,7 +160,7 @@ const employeeLogin = (req, res, next) => {
                 })
             }
         })
-
+    })
     } catch (err) {
         next(err.message)
     }
