@@ -1,0 +1,14 @@
+{ 
+    "master_db": {
+        "host": "localhost",
+        "port": 5432,
+        "user": "postgres",
+        "password": "Asjad2001",
+        "database": "tsbtc_masterdatabase",
+        "idleTimeoutMillis": 0,
+        "connectionTimeoutMillis": 0
+    },
+    "db_prefix": "tsbtc_company_"
+}
+
+
